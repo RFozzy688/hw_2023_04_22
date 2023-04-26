@@ -11,10 +11,39 @@ using System.Threading.Tasks;
 
 namespace task_1
 {
+    public delegate void GetMessage(string str);
+    public class Message
+    {
+        public static void PrintMessageStatic(string str)
+        {
+            Console.WriteLine(str);
+        }
+        public void PrintMessage(string str)
+        {
+            Console.WriteLine(str);
+        }
+    }
     internal class Program
     {
         static void Main(string[] args)
         {
+            Message message = new Message();
+
+            GetMessage getStringMsg = new GetMessage(Message.PrintMessageStatic);
+
+            getStringMsg.Invoke("message 1");
+            getStringMsg("message 2");
+
+            getStringMsg = new GetMessage(message.PrintMessage);
+            getStringMsg.Invoke("message 3");
+            getStringMsg("message 4");
+
+            getStringMsg = message.PrintMessage;
+            getStringMsg.Invoke("message 5");
+            getStringMsg("message 6");
+
+            getStringMsg = Message.PrintMessageStatic;
+            getStringMsg("message 7");
         }
     }
 }

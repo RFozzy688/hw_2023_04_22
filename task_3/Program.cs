@@ -14,10 +14,62 @@ using System.Threading.Tasks;
 
 namespace task_3
 {
+    delegate bool Predicate<in T>(T value);
+
     internal class Program
     {
         static void Main(string[] args)
         {
+            Predicate<uint>[] numberChecking = {IsEven, IsOdd};
+            uint number;
+
+            Console.Write(" Введите число: ");
+            number = UInt32.Parse(Console.ReadLine());
+
+            Console.WriteLine(" Проверить на:");
+            Console.WriteLine(" 1 - Четность\n 2 - Не четность\n 3 - Простое число\n 4 - Число Фибоначчи");
+            Console.Write(" > ");
+            uint index = UInt32.Parse(Console.ReadLine());
+
+            if (index >= 1 && index <= 4)
+            {
+                bool flag = numberChecking[index - 1](number);
+
+                Console.Write($"Число: {number} ");
+
+                switch (index)
+                {
+                    case 1:
+                        if (flag)
+                        {
+                            Console.WriteLine("четное");
+                        }
+                        else
+                        {
+                            Console.WriteLine("не четное");
+                        }
+                        break;
+                    case 2:
+                        if (flag)
+                        {
+                            Console.WriteLine("не четное");
+                        }
+                        else
+                        {
+                            Console.WriteLine("четное");
+                        }
+                        break;
+                }
+            }
+        }
+
+        public static bool IsEven(uint number)
+        {
+            return (number % 2 == 0) ? true : false;
+        }
+        public static bool IsOdd(uint number)
+        {
+            return (number % 2 != 0) ? true : false;
         }
     }
 }

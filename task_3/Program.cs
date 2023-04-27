@@ -20,7 +20,7 @@ namespace task_3
     {
         static void Main(string[] args)
         {
-            Predicate<uint>[] numberChecking = {IsEven, IsOdd};
+            Predicate<uint>[] numberChecking = {IsEven, IsOdd, IsNaturalNumber};
             uint number;
 
             Console.Write(" Введите число: ");
@@ -59,6 +59,16 @@ namespace task_3
                             Console.WriteLine("четное");
                         }
                         break;
+                    case 3:
+                        if (flag)
+                        {
+                            Console.WriteLine("натуральное число");
+                        }
+                        else
+                        {
+                            Console.WriteLine("не натуральное число");
+                        }
+                        break;
                 }
             }
         }
@@ -70,6 +80,23 @@ namespace task_3
         public static bool IsOdd(uint number)
         {
             return (number % 2 != 0) ? true : false;
+        }
+        public static bool IsNaturalNumber(uint number)
+        {
+            if (number == 1)
+            {
+                return false;
+            }
+
+            for (int i = 2; i < number; i++)
+            {
+                if (number % i == 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace task_3
     {
         static void Main(string[] args)
         {
-            Predicate<uint>[] numberChecking = {IsEven, IsOdd, IsNaturalNumber};
+            Predicate<uint>[] numberChecking = {IsEven, IsOdd, IsNaturalNumber, IsFibonacci};
             uint number;
 
             Console.Write(" Введите число: ");
@@ -69,6 +69,16 @@ namespace task_3
                             Console.WriteLine("не натуральное число");
                         }
                         break;
+                    case 4:
+                        if (flag)
+                        {
+                            Console.WriteLine("является числом Фибоначчи");
+                        }
+                        else
+                        {
+                            Console.WriteLine("не является числом Фибоначчи");
+                        }
+                        break;
                 }
             }
         }
@@ -97,6 +107,15 @@ namespace task_3
             }
 
             return true;
+        }
+        public static bool IsFibonacci(uint number)
+        {
+            if (Math.Sqrt(5 * Math.Pow(number, 2) - 4) % 1 == 0 || Math.Sqrt(5 * Math.Pow(number, 2) + 4) % 1 == 0)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
